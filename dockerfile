@@ -9,7 +9,12 @@ RUN apk --no-cache add curl gettext
 RUN mkdir /working
 WORKDIR /working
 
-RUN curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VER}/kustomize_${KUSTOMIZE_VER}_linux_amd64  -o /usr/bin/kustomize \
+
+
+RUN curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VER}/kustomize_v${KUSTOMIZE_VER}_linux_amd64.tar.gz -o kustomize.tar.gz \
+    && tar -zxvf kustomize.tar.gz kustomize \
+    && mv kustomize /usr/bin/kustomize \
+    && rm -r kustomize.tar.gz \
     && chmod +x /usr/bin/kustomize
 
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VER}/bin/linux/amd64/kubectl -o /usr/bin/kubectl \
@@ -19,4 +24,5 @@ RUN curl -L https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz -o helm.tar
     && tar -zxvf helm.tar.gz linux-amd64/helm \
     && mv linux-amd64/helm /usr/bin/helm \
     && rm -r linux-amd64 \
-    && rm -r helm.tar.gz
+    && rm -r helm.tar.gz \
+    && chmod +x /usr/bin/helm
