@@ -26,10 +26,3 @@ RUN curl -L https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz -o helm.tar
     && rm -r linux-amd64 \
     && rm -r helm.tar.gz \
     && chmod +x /usr/bin/helm
-
-# Adding repos here to avoid having to do it at runtime unnecesarily
-
-RUN helm repo add argo https://argoproj.github.io/argo-helm
-RUN helm repo add bitnami https://charts.bitnami.com/bitnami 
-RUN helm repo add grafana https://grafana.github.io/helm-charts
-RUN helm repo add stenic https://charts.stenic.io/ 
