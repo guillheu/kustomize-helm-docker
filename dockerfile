@@ -26,3 +26,5 @@ RUN curl -L https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz -o helm.tar
     && rm -r linux-amd64 \
     && rm -r helm.tar.gz \
     && chmod +x /usr/bin/helm
+
+RUN chmod -R 777 /working
